@@ -21,13 +21,17 @@ page.onConsoleMessage = function(msg) {
 page.open(url, function(status) {
 	console.log('OK');
 	console.log('#', getDocumentTitle());
+
 	var texts = getMainTexts();
 	var kataWords = getKataWords(texts.join(' '));
 	var names = unique(kataWords);
 	var filteredNames = filterByNa(names);
 	var namesFilteredNicely = filterNicely(filteredNames);
 	var sakanaNames = injectSakana(namesFilteredNicely);
-	showNames(sakanaNames);
+
+	for (var i=0, l=sakanaNames.length; i<l; i++) {
+		console.log('-', sakanaNames[i]);
+	}
 
 	console.log('done.');
 });
@@ -127,12 +131,6 @@ function filterNicely(names) {
 	return filtered;
 }
 
-function showNames(names) {
-	for (var i=0, l=names.length; i<l; i++) {
-		console.log('-', names[i]);
-	}
-}
-
 function injectSakana(names) {
 	var injecteds = [];
 	for (var i=0, l=names.length; i<l; i++) {
@@ -143,4 +141,3 @@ function injectSakana(names) {
 	}
 	return injecteds;
 }
-
