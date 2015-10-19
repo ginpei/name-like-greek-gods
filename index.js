@@ -18,6 +18,10 @@ page.open(url, function(status) {
 	page.evaluate(function() {
 		var TEXT_NODE = document.TEXT_NODE;
 		var ELEMENT_NODE = document.ELEMENT_NODE;
+		var prefix = 'サカナ';
+
+		var delimiter = prefix[prefix.length-1];
+
 		function getTextNode(el, results) {
 			if (!results) {
 				results = [];
@@ -62,11 +66,10 @@ page.open(url, function(status) {
 		}
 
 		function filterByNa(names) {
-			var keyword = 'ナ';
 			var filtered = [];
 			for (var i=0, l=names.length; i<l; i++) {
 				var name = names[i];
-				if (name.indexOf(keyword) >= 0) {
+				if (name.indexOf(delimiter) >= 0) {
 					filtered.push(name);
 				}
 			}
@@ -74,7 +77,7 @@ page.open(url, function(status) {
 		}
 
 		function filterNicely(names) {
-			var deniedSufixes = ['ナ', 'ナイ', 'ナー'];
+			var deniedSufixes = [delimiter, delimiter+'イ', delimiter+'ー'];
 			var filtered = [];
 			for (var i=0, l=names.length; i<l; i++) {
 				var name = names[i];
@@ -100,12 +103,10 @@ page.open(url, function(status) {
 		}
 
 		function injectSakana(names) {
-			var prefix = 'サカナ';
-			var keyword = 'ナ';
 			var injecteds = [];
 			for (var i=0, l=names.length; i<l; i++) {
 				var name = names[i];
-				var index = name.indexOf(keyword);
+				var index = name.indexOf(delimiter);
 				var injected = prefix + name.slice(index+1);
 				injecteds.push(injected);
 			}
