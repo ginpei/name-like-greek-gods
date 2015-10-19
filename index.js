@@ -20,9 +20,7 @@ page.onConsoleMessage = function(msg) {
 };
 page.open(url, function(status) {
 	console.log('OK');
-	page.evaluate(function() {
-		console.log('#', document.title);
-	});
+	console.log('#', getDocumentTitle());
 	var texts = getMainTexts();
 	var kataWords = getKataWords(texts.join(' '));
 	var names = unique(kataWords);
@@ -38,6 +36,12 @@ console.log('Fetching...');
 console.log(url);
 
 // --------------------------------
+
+function getDocumentTitle() {
+	return page.evaluate(function() {
+		return document.title;
+	});
+}
 
 function getMainTexts() {
 	return page.evaluate(function() {
