@@ -23,7 +23,24 @@ page.open(url, function(status) {
 	page.evaluate(function() {
 		console.log('#', document.title);
 	});
-	var texts = page.evaluate(function() {
+	var texts = getMainTexts();
+	var kataWords = getKataWords(texts.join(' '));
+	var names = unique(kataWords);
+	var filteredNames = filterByNa(names);
+	var namesFilteredNicely = filterNicely(filteredNames);
+	var sakanaNames = injectSakana(namesFilteredNicely);
+	showNames(sakanaNames);
+
+	console.log('done.');
+});
+
+console.log('Fetching...');
+console.log(url);
+
+// --------------------------------
+
+function getMainTexts() {
+	return page.evaluate(function() {
 		var TEXT_NODE = document.TEXT_NODE;
 		var ELEMENT_NODE = document.ELEMENT_NODE;
 		function getTextNode(el, results) {
@@ -52,21 +69,7 @@ page.open(url, function(status) {
 		var texts = getTextNode(elMain);
 		return texts;
 	});
-
-	var kataWords = getKataWords(texts.join(' '));
-	var names = unique(kataWords);
-	var filteredNames = filterByNa(names);
-	var namesFilteredNicely = filterNicely(filteredNames);
-	var sakanaNames = injectSakana(namesFilteredNicely);
-	showNames(sakanaNames);
-
-	console.log('done.');
-});
-
-console.log('Fetching...');
-console.log(url);
-
-// --------------------------------
+}
 
 function getKataWords(text) {
 	var rxKata = /[ア-ンヴー]+/g;
