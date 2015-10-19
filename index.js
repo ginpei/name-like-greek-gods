@@ -15,34 +15,9 @@ page.onConsoleMessage = function(msg) {
 	console.log(msg);
 };
 page.open(url, function(status) {
-	page.evaluate(function() {
-		var TEXT_NODE = document.TEXT_NODE;
-		var ELEMENT_NODE = document.ELEMENT_NODE;
 		var prefix = 'サカナ';
 
 		var delimiter = prefix[prefix.length-1];
-
-		function getTextNode(el, results) {
-			if (!results) {
-				results = [];
-			}
-
-			var children = el.childNodes;
-			for (var i=0, l=children.length; i<l; i++) {
-				var child = children[i];
-				if (child === null) {
-					continue;
-				}
-				else if (child.nodeType === ELEMENT_NODE) {
-					getTextNode(child, results);
-				}
-				else if (child.nodeType === TEXT_NODE) {
-					results.push(child.textContent);
-				}
-			}
-
-			return results;
-		}
 
 		function getKataWords(text) {
 			var rxKata = /[ア-ンヴー]+/g;
@@ -114,9 +89,38 @@ page.open(url, function(status) {
 		}
 
 		console.log('OK');
+	page.evaluate(function() {
 		console.log('#', document.title);
+	});
+	var texts = page.evaluate(function() {
+		var TEXT_NODE = document.TEXT_NODE;
+		var ELEMENT_NODE = document.ELEMENT_NODE;
+		function getTextNode(el, results) {
+			if (!results) {
+				results = [];
+			}
+
+			var children = el.childNodes;
+			for (var i=0, l=children.length; i<l; i++) {
+				var child = children[i];
+				if (child === null) {
+					continue;
+				}
+				else if (child.nodeType === ELEMENT_NODE) {
+					getTextNode(child, results);
+				}
+				else if (child.nodeType === TEXT_NODE) {
+					results.push(child.textContent);
+				}
+			}
+
+			return results;
+		}
+
 		var elMain = document.querySelector('#mw-content-text');
 		var texts = getTextNode(elMain);
+		return texts;
+	});
 
 		var kataWords = getKataWords(texts.join(' '));
 		var names = unique(kataWords);
@@ -126,7 +130,6 @@ page.open(url, function(status) {
 		showNames(sakanaNames);
 
 		console.log('done.');
-	});
 });
 
 console.log('Fetching...');
