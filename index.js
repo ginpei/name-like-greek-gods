@@ -27,7 +27,8 @@ page.open(url, function(status) {
 	var names = unique(kataWords);
 	var filteredNames = filterByNa(names);
 	var namesFilteredNicely = filterNicely(filteredNames);
-	var resultNames = injectBaseName(namesFilteredNicely);
+	var allResultNames = injectBaseName(namesFilteredNicely);
+	var resultNames = unique(allResultNames);
 
 	for (var i=0, l=resultNames.length; i<l; i++) {
 		console.log('-', resultNames[i]);
