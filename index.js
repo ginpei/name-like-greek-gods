@@ -1,5 +1,7 @@
 var defaultBaseName = 'サカナ';
 var defaultUrl = 'https://ja.wikipedia.org/wiki/%E3%82%AE%E3%83%AA%E3%82%B7%E3%82%A2%E7%A5%9E%E8%A9%B1';
+var rxKata = /[ア-ンヴー]+/g;
+var longVowel = 'ー';
 
 var baseName = phantom.args[0] || defaultBaseName;
 var url = phantom.args[1] || defaultUrl;
@@ -83,7 +85,6 @@ function getMainTexts() {
 }
 
 function getKataWords(text) {
-	var rxKata = /[ア-ンヴー]+/g;
 	var names = text.match(rxKata) || [];
 	return names;
 }
@@ -115,7 +116,7 @@ function filterByNa(names) {
 }
 
 function filterNicely(names) {
-	var deniedSufixes = [delimiter, delimiter+'ー'];
+	var deniedSufixes = [delimiter, delimiter+longVowel];
 	var filtered = [];
 	for (var i=0, l=names.length; i<l; i++) {
 		var name = names[i];
