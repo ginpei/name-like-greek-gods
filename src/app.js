@@ -27,6 +27,7 @@ module.exports = {
 			}
 
 			console.log('done.');
+			phantom.exit();
 		});
 
 		console.log('Fetching...');
