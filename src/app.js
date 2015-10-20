@@ -7,17 +7,7 @@ module.exports = {
 
 		var delimiter = baseName[baseName.length-1];
 
-		var webpage;
-		try {
-			webpage = require('webpage');
-		}
-		catch (error) {
-			console.log('Use phantomjs instead of node. Like this:');
-			console.log('  $ phantomjs index.js');
-			process.exit(1);
-		}
-
-		var page = webpage.create();
+		var page = require('webpage').create();
 		page.onConsoleMessage = function(msg) {
 			console.log(msg);
 		};
