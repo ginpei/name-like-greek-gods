@@ -1,5 +1,8 @@
-var url = 'https://ja.wikipedia.org/wiki/%E3%82%AE%E3%83%AA%E3%82%B7%E3%82%A2%E7%A5%9E%E8%A9%B1';
-var baseName = 'サカナ';
+var defaultUrl = 'https://ja.wikipedia.org/wiki/%E3%82%AE%E3%83%AA%E3%82%B7%E3%82%A2%E7%A5%9E%E8%A9%B1';
+var defaultBaseName = 'サカナ';
+
+var baseName = phantom.args[0] || defaultBaseName;
+var url = phantom.args[1] || defaultUrl;
 
 var delimiter = baseName[baseName.length-1];
 
