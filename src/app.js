@@ -3,7 +3,6 @@ module.exports = {
 	start: function(args) {
 		var baseName = args.baseName || japanese.defaultBaseName;
 		var url = args.url || japanese.defaultUrl;
-		console.log(baseName, url);
 
 		var delimiter = baseName[baseName.length-1];
 
