@@ -37,3 +37,23 @@ OK
 (…省略…)
 done.
 ```
+
+ローマ皇帝も可:
+
+```
+$ npm start ギンペイ https://ja.wikipedia.org/wiki/ローマ皇帝一覧
+
+(…省略…)
+
+Fetching...
+https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%83%9E%E7%9A%87%E5%B8%9D%E4%B8%80%E8%A6%A7
+OK
+# ローマ皇帝一覧 - Wikipedia
+- ギンペイタリア
+- ギンペイウス
+- ギンペイタリカ
+- ギンペイア
+- ギンペイスス
+(…省略…)
+done.
+```
