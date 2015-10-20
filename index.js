@@ -115,7 +115,7 @@ function filterByNa(names) {
 }
 
 function filterNicely(names) {
-	var deniedSufixes = [delimiter, delimiter+'イ', delimiter+'ー'];
+	var deniedSufixes = [delimiter, delimiter+'ー'];
 	var filtered = [];
 	for (var i=0, l=names.length; i<l; i++) {
 		var name = names[i];
