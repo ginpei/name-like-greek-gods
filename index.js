@@ -6,7 +6,6 @@ var url = phantom.args[1] || defaultUrl;
 
 var delimiter = baseName[baseName.length-1];
 
-
 var webpage;
 try {
 	webpage = require('webpage');
