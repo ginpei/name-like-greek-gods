@@ -10,6 +10,12 @@ module.exports = {
 		console.log('Fetching...');
 		console.log(url);
 		client.fetch(url, function(err, $, res, body) {
+			if (err) {
+				console.log('** NG **');
+				console.error(err);
+				process.exit(0);
+			}
+
 			console.log('OK');
 			console.log('#', getDocumentTitle($));
 

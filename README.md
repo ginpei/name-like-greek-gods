@@ -38,10 +38,10 @@ OK
 done.
 ```
 
-ローマ皇帝も可:
+ローマ皇帝も可（指定するURLはエンコード済みである必要があります）:
 
 ```
-$ npm start ギンペイ https://ja.wikipedia.org/wiki/ローマ皇帝一覧
+$ npm start ギンペイ https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%83%9E%E7%9A%87%E5%B8%9D%E4%B8%80%E8%A6%A7
 
 (…省略…)
 
