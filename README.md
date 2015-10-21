@@ -38,7 +38,7 @@ OK
 done.
 ```
 
-ローマ皇帝も可（指定するURLはエンコード済みである必要があります）:
+ローマ皇帝も可:
 
 ```
 $ npm start ギンペイ https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%83%9E%E7%9A%87%E5%B8%9D%E4%B8%80%E8%A6%A7
@@ -56,4 +56,19 @@ OK
 - ギンペイスス
 (…省略…)
 done.
+```
+
+URLはエンコード済みである必要があります:
+
+```
+$ npm start ギンペイ https://ja.wikipedia.org/wiki/ローマ皇帝一覧
+
+(…省略…)
+
+Fetching...
+https://ja.wikipedia.org/wiki/ローマ皇帝一覧
+** NG **
+{ [Error: server status]
+  url: 'https://ja.wikipedia.org/wiki/ローマ皇帝一覧',
+  statusCode: 400 }
 ```
