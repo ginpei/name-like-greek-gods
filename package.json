@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "start": "./node_modules/phantomjs/bin/phantomjs index.js"
+    "start": "node index.js"
   },
   "dependencies": {
-    "phantomjs": "^1.9.18"
+    "cheerio-httpcli": "^0.3.3"
   }
 }

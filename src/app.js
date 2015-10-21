@@ -1,3 +1,4 @@
+var client = require('cheerio-httpcli');
 var japanese = require('./ja.js');
 module.exports = {
 	start: function(args) {
@@ -6,16 +7,14 @@ module.exports = {
 
 		var delimiter = baseName[baseName.length-1];
 
-		var page = require('webpage').create();
-		page.onConsoleMessage = function(msg) {
-			console.log(msg);
-		};
-		page.open(url, function(status) {
+		console.log('Fetching...');
+		console.log(url);
+		client.fetch(url, function(err, $, res, body) {
 			console.log('OK');
-			console.log('#', getDocumentTitle());
+			console.log('#', getDocumentTitle($));
 
-			var texts = getMainTexts();
-			var kataWords = getKataWords(texts.join(' '));
+			var text = getMainText($);
+			var kataWords = getKataWords(text);
 			var names = unique(kataWords);
 			var filteredNames = filterByNa(names);
 			var namesFilteredNicely = filterNicely(filteredNames);
@@ -27,50 +26,17 @@ module.exports = {
 			}
 
 			console.log('done.');
-			phantom.exit();
+			process.exit();
 		});
-
-		console.log('Fetching...');
-		console.log(url);
 
 		// --------------------------------
 
-		function getDocumentTitle() {
-			return page.evaluate(function() {
-				return document.title;
-			});
+		function getDocumentTitle($) {
+			return $('title').text();
 		}
 
-		function getMainTexts() {
-			return page.evaluate(function() {
-				var TEXT_NODE = document.TEXT_NODE;
-				var ELEMENT_NODE = document.ELEMENT_NODE;
-				function getTextNode(el, results) {
-					if (!results) {
-						results = [];
-					}
-
-					var children = el.childNodes;
-					for (var i=0, l=children.length; i<l; i++) {
-						var child = children[i];
-						if (child === null) {
-							continue;
-						}
-						else if (child.nodeType === ELEMENT_NODE) {
-							getTextNode(child, results);
-						}
-						else if (child.nodeType === TEXT_NODE) {
-							results.push(child.textContent);
-						}
-					}
-
-					return results;
-				}
-
-				var elMain = document.querySelector('#mw-content-text');
-				var texts = getTextNode(elMain);
-				return texts;
-			});
+		function getMainText($) {
+			return $('#mw-content-text').text();
 		}
 
 		function getKataWords(text) {
