@@ -1,5 +1,7 @@
 # Change a Japanese name to something like a Greek God
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ginpei/name-like-greek-gods.svg)](https://greenkeeper.io/)
+
 ギリシア神話風の名前を付けるやつです。
 
 ## ご使用になる前に
