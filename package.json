@@ -4,6 +4,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "cheerio-httpcli": "^0.3.3"
+    "cheerio-httpcli": "^0.6.11"
   }
 }
